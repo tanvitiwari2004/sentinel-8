@@ -3,12 +3,8 @@ numpy
 scikit-learn
 xgboost
 shap
-keras
-tensorflow
-optuna
 streamlit
 plotly
-anthropic
-jupyter
-matplotlib
-seaborn
+joblib
+groq
+python-dotenv
