@@ -40,9 +40,9 @@ Sentinel-8 is a two-stage machine learning pipeline that analyses network logs, 
 
 ## Results
 
-| Model | Metric | Score |
+|      Model       | Metric  | Score |
 
-|---|---|---|
+|------------------|---------|-------|
 
 | Isolation Forest | ROC-AUC | 0.9467 |
 
@@ -78,13 +78,13 @@ Raw Logs → Preprocessing → Anomaly Detection → Threat Classification → E
 
 ## Tech Stack
 
-\- \*\*ML:\*\* Isolation Forest, XGBoost, SHAP
+\- **ML:** Isolation Forest, XGBoost, SHAP
 
-\- \*\*LLM:\*\* Groq API (Llama 3.1)
+\- **LLM:** Groq API (Llama 3.1)
 
-\- \*\*Dashboard:\*\* Streamlit + Plotly
+\- **Dashboard:** Streamlit + Plotly
 
-\- \*\*Data:\*\* UNSW-NB15, CICIDS2017
+\- **Data:** UNSW-NB15, CICIDS2017
 
 
 
@@ -142,9 +142,9 @@ sentinel-8/
 
 ## Dataset
 
-\- \*\*UNSW-NB15\*\* — 2.5M records, UNSW Sydney (Australian origin)
+\- **UNSW-NB15** — 2.5M records, UNSW Sydney (Australian origin)
 
-\- \*\*CICIDS2017\*\* — 2.8M records, Canadian Institute for Cybersecurity
+\- **CICIDS2017** — 2.8M records, Canadian Institute for Cybersecurity
 
 
 
@@ -154,7 +154,7 @@ Model trained on UNSW-NB15 features. Direct generalisation to CICIDS2017 is limi
 
 
 
-\## Authors
+## Authors
 
 Tanvi Tiwari, Lavanya Singh, Angel Bhandari
 
