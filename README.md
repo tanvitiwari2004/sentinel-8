@@ -1,6 +1,6 @@
-\# 🛡️ Sentinel-8
+# 🛡️ Sentinel-8
 
-\### AI-Based Cybersecurity Threat Detection System
+### AI-Based Cybersecurity Threat Detection System
 
 > Aligned with Australia's Essential Eight Framework (ACSC)
 
@@ -16,29 +16,29 @@
 
 
 
-\---
+---
 
 
 
-\## Overview
+## Overview
 
 Sentinel-8 is a two-stage machine learning pipeline that analyses network logs, detects cybersecurity threats, and maps every finding to the Australian Government's Essential Eight controls — automatically.
 
 
 
-\## Live Demo
+## Live Demo
 
 🔗 \[sentinel-8 on Hugging Face](https://huggingface.co/spaces/tanvitiwari2004/sentinel-8)
 
 
 
-\## Architecture
+## Architecture
 
 !\[Architecture](reports/architecture.png)
 
 
 
-\## Results
+## Results
 
 | Model | Metric | Score |
 
@@ -54,7 +54,7 @@ Sentinel-8 is a two-stage machine learning pipeline that analyses network logs, 
 
 
 
-\## Pipeline
+## Pipeline
 
 ```
 
@@ -64,7 +64,7 @@ Raw Logs → Preprocessing → Anomaly Detection → Threat Classification → E
 
 
 
-\## Essential Eight Controls Monitored
+## Essential Eight Controls Monitored
 
 \- #1 Application Control
 
@@ -76,7 +76,7 @@ Raw Logs → Preprocessing → Anomaly Detection → Threat Classification → E
 
 
 
-\## Tech Stack
+## Tech Stack
 
 \- \*\*ML:\*\* Isolation Forest, XGBoost, SHAP
 
@@ -88,7 +88,7 @@ Raw Logs → Preprocessing → Anomaly Detection → Threat Classification → E
 
 
 
-\## Setup
+## Setup
 
 ```bash
 
@@ -110,7 +110,7 @@ streamlit run app.py
 
 
 
-\## Project Structure
+## Project Structure
 
 ```
 
@@ -140,7 +140,7 @@ sentinel-8/
 
 
 
-\## Dataset
+## Dataset
 
 \- \*\*UNSW-NB15\*\* — 2.5M records, UNSW Sydney (Australian origin)
 
@@ -148,7 +148,7 @@ sentinel-8/
 
 
 
-\## Limitations
+## Limitations
 
 Model trained on UNSW-NB15 features. Direct generalisation to CICIDS2017 is limited due to dataset shift — different feature extraction methods between datasets. A production system would require retraining on target dataset features.
 
