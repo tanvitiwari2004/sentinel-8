@@ -4,12 +4,9 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-def generate_report(threat_type, anomaly_score, e8_control, risk_level, top_features):
-    api_key = os.getenv("GROQ_API_KEY")
-    if not api_key:
-        return "⚠️ **Error:** `GROQ_API_KEY` is not set in your environment. Please specify it to generate AI analyst reports."
+client = Groq(api_key=os.getenv("GROQ_API_KEY"))
 
-    client = Groq(api_key=api_key)
+def generate_report(threat_type, anomaly_score, e8_control, risk_level, top_features):
     prompt = f"""You are a cybersecurity analyst. Write a 3-4 sentence plain English report for the following threat alert.
 
 Threat Type: {threat_type}
@@ -20,15 +17,13 @@ Top Indicators: {', '.join(top_features)}
 
 Write clearly for a non-technical manager. Be direct and specific."""
 
-    try:
-        response = client.chat.completions.create(
-            model="llama-3.1-8b-instant",
-            messages=[{"role": "user", "content": prompt}],
-            max_tokens=300
-        )
-        return response.choices[0].message.content
-    except Exception as e:
-        return f"⚠️ **Failed to generate report:** {str(e)}"
+    response = client.chat.completions.create(
+        model="llama-3.1-8b-instant",
+        messages=[{"role": "user", "content": prompt}],
+        max_tokens=300
+    )
+
+    return response.choices[0].message.content
 
 if __name__ == "__main__":
     report = generate_report(
