@@ -33,6 +33,15 @@ st.markdown("""
     }
     .main { background-color: #0D1117; }
     
+    /* Hide Sidebar Collapse and Expand Buttons */
+    [data-testid="collapsedControl"],
+    [data-testid="stSidebarCollapseButton"],
+    [data-testid="baseButton-header"],
+    [data-testid="stSidebarHeader"] button,
+    section[data-testid="stSidebar"] button[title="Collapse sidebar"] {
+        display: none !important;
+    }
+    
     /* Remove padding */
     #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
