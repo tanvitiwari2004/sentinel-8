@@ -11,7 +11,11 @@ import os
 import time
 from pathlib import Path
 
-sys.path.append(str(Path(__file__).resolve().parent))
+# Fix: Ensure we can import local modules when app.py is moved to root
+current_dir = Path(__file__).resolve().parent
+if str(current_dir) not in sys.path:
+    sys.path.insert(0, str(current_dir))
+
 from compliance_mapper import map_threat
 from llm_reporter import generate_report
 
@@ -230,14 +234,19 @@ def load_models():
     # Project root should be /app/
     # Models should be at /app/models/
     current_dir = Path(__file__).resolve().parent
-    project_root = current_dir.parent
-    models_dir = project_root / "models"
+    
+    # Try current directory first, then parent (agnostic to root vs dashboard/ folder)
+    if (current_dir / "models").exists():
+        models_dir = current_dir / "models"
+    else:
+        models_dir = current_dir.parent / "models"
+    
+    project_root = models_dir.parent
     
     # Debug Info (will show in Hugging Face Logs)
-    print(f"[DEBUG] Current script directory: {current_dir}")
-    print(f"[DEBUG] Calculated project root: {project_root}")
-    print(f"[DEBUG] Expected models directory: {models_dir}")
-    print(f"[DEBUG] Files in project root: {os.listdir(project_root) if project_root.exists() else 'Root not found'}")
+    print(f"[DEBUG] Current script location: {Path(__file__).resolve()}")
+    print(f"[DEBUG] Detected models directory: {models_dir}")
+    print(f"[DEBUG] Files in project root: {os.listdir(project_root) if project_root.exists() else 'N/A'}")
     
     if models_dir.exists():
         print(f"[DEBUG] Files in models directory: {os.listdir(models_dir)}")
