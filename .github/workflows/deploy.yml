@@ -23,7 +23,7 @@ jobs:
 
       - name: Push to Hugging Face Space
         run: |
-          git clone https://huggingface.co/spaces/tanvitiwari2004/sentinel-8 hf-space
+          git clone https://huggingface.co/spaces/tanvitiwari2004/sentinel8 hf-space
 
           rm -rf hf-space/dashboard hf-space/data hf-space/models
 
