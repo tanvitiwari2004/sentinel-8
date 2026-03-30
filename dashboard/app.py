@@ -9,9 +9,8 @@ import matplotlib.pyplot as plt
 import sys
 import os
 import time
-from pathlib import Path
 
-sys.path.append(str(Path(__file__).resolve().parent))
+sys.path.append(os.path.dirname(__file__))
 from compliance_mapper import map_threat
 from llm_reporter import generate_report
 
@@ -225,52 +224,11 @@ st.markdown("""
 # ── LOAD MODELS ──────────────────────────────────────────
 @st.cache_resource
 def load_models():
-    # 1. Resolve Path Robustly
-    # Current file is at /app/dashboard/app.py
-    # Project root should be /app/
-    # Models should be at /app/models/
-    current_dir = Path(__file__).resolve().parent
-    project_root = current_dir.parent
-    models_dir = project_root / "models"
-    
-    # Debug Info (will show in Hugging Face Logs)
-    print(f"[DEBUG] Current script directory: {current_dir}")
-    print(f"[DEBUG] Calculated project root: {project_root}")
-    print(f"[DEBUG] Expected models directory: {models_dir}")
-    print(f"[DEBUG] Files in project root: {os.listdir(project_root) if project_root.exists() else 'Root not found'}")
-    
-    if models_dir.exists():
-        print(f"[DEBUG] Files in models directory: {os.listdir(models_dir)}")
-    else:
-        print(f"[DEBUG] Models directory NOT FOUND at {models_dir}")
-
-    # 2. Define File Paths
-    iso_path = models_dir / "isolation_forest.pkl"
-    xgb_path = models_dir / "xgboost_classifier.pkl"
-    
-    # 3. Robust Loading with Error Handling
-    missing_files = []
-    if not iso_path.exists(): missing_files.append(str(iso_path))
-    if not xgb_path.exists(): missing_files.append(str(xgb_path))
-    
-    if missing_files:
-        error_msg = f"CRITICAL: Model files missing: {', '.join(missing_files)}"
-        print(f"[ERROR] {error_msg}")
-        st.error(error_msg)
-        st.info(f"Verified current directory: {os.getcwd()}")
-        st.info(f"Contents of {project_root}: {os.listdir(project_root) if project_root.exists() else 'N/A'}")
-        raise FileNotFoundError(error_msg)
-
-    # 4. Actual Load
-    try:
-        iso = joblib.load(iso_path)
-        xgb = joblib.load(xgb_path)
-        # Build explainer dynamically
-        explainer = shap.TreeExplainer(xgb)
-        return iso, xgb, explainer
-    except Exception as e:
-        st.error(f"Error during model deserialization: {e}")
-        raise e
+    iso = joblib.load('../models/isolation_forest.pkl')
+    xgb = joblib.load('../models/xgboost_classifier.pkl')
+    # Build explainer once
+    explainer = shap.TreeExplainer(xgb)
+    return iso, xgb, explainer
 
 iso_forest, xgb, shap_explainer = load_models()
 
