@@ -224,8 +224,13 @@ st.markdown("""
 # ── LOAD MODELS ──────────────────────────────────────────
 @st.cache_resource
 def load_models():
-    iso = joblib.load('../models/isolation_forest.pkl')
-    xgb = joblib.load('../models/xgboost_classifier.pkl')
+    # Use absolute paths relative to this script's directory
+    base_path = os.path.dirname(__file__)
+    iso_path = os.path.join(base_path, "..", "models", "isolation_forest.pkl")
+    xgb_path = os.path.join(base_path, "..", "models", "xgboost_classifier.pkl")
+    
+    iso = joblib.load(iso_path)
+    xgb = joblib.load(xgb_path)
     # Build explainer once
     explainer = shap.TreeExplainer(xgb)
     return iso, xgb, explainer

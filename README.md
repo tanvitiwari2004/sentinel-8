@@ -1,3 +1,13 @@
+---
+title: Sentinel-8
+emoji: 🛡️
+colorFrom: blue
+colorTo: green
+sdk: streamlit
+app_file: dashboard/app.py
+pinned: false
+---
+
 # 🛡️ Sentinel-8
 
 ### AI-Based Cybersecurity Threat Detection System
